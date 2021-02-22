@@ -3,27 +3,27 @@ AVR-CLI.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  000000f8  2**0
+  0 .data         00000000  00800100  00800100  0000010c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000000a4  00000000  00000000  00000054  2**1
+  1 .text         000000b8  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  000000f8  2**0
+  2 .comment      00000030  00000000  00000000  0000010c  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000128  2**2
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000013c  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000020  00000000  00000000  00000164  2**0
+  4 .debug_aranges 00000088  00000000  00000000  00000178  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000007fd  00000000  00000000  00000184  2**0
+  5 .debug_info   000009ba  00000000  00000000  00000200  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000761  00000000  00000000  00000981  2**0
+  6 .debug_abbrev 0000086d  00000000  00000000  00000bba  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000001a2  00000000  00000000  000010e2  2**0
+  7 .debug_line   000002b8  00000000  00000000  00001427  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000024  00000000  00000000  00001284  2**2
+  8 .debug_frame  000000a0  00000000  00000000  000016e0  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000003a7  00000000  00000000  000012a8  2**0
+  9 .debug_str    000003f5  00000000  00000000  00001780  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00000010  00000000  00000000  0000164f  2**0
+ 10 .debug_ranges 00000048  00000000  00000000  00001b75  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -107,23 +107,66 @@ Disassembly of section .text:
   92:	d0 e1       	ldi	r29, 0x10	; 16
   94:	de bf       	out	0x3e, r29	; 62
   96:	cd bf       	out	0x3d, r28	; 61
-  98:	02 d0       	rcall	.+4      	; 0x9e <main>
-  9a:	02 c0       	rjmp	.+4      	; 0xa0 <_exit>
+  98:	07 d0       	rcall	.+14     	; 0xa8 <main>
+  9a:	0c c0       	rjmp	.+24     	; 0xb4 <_exit>
 
 0000009c <__bad_interrupt>:
   9c:	b1 cf       	rjmp	.-158    	; 0x0 <__vectors>
 
-0000009e <main>:
+0000009e <apInit>:
+﻿#include "ap.h"
 
-#include <avr/io.h>
+
+void apInit(void)
+{
+  9e:	08 95       	ret
+
+000000a0 <apMain>:
+	
+}
+
+
+void apMain(void)
+{
+  a0:	ff cf       	rjmp	.-2      	; 0xa0 <apMain>
+
+000000a2 <bspInit>:
+﻿#include "bsp.h"
+
+
+void bspInit(void)
+{
+  a2:	08 95       	ret
+
+000000a4 <hwInit>:
+﻿#include "hw.h"
+
+void hwInit(void)
+{
+	bspInit();
+  a4:	fe cf       	rjmp	.-4      	; 0xa2 <bspInit>
+  a6:	08 95       	ret
+
+000000a8 <main>:
+#include "main.h"
 
 
 int main(void)
 {
-  9e:	ff cf       	rjmp	.-2      	; 0x9e <main>
+    hwInit();
+  a8:	fd df       	rcall	.-6      	; 0xa4 <hwInit>
+	apInit();
+  aa:	f9 df       	rcall	.-14     	; 0x9e <apInit>
+	
+	apMain();
+  ac:	f9 df       	rcall	.-14     	; 0xa0 <apMain>
+  ae:	80 e0       	ldi	r24, 0x00	; 0
+}
+  b0:	90 e0       	ldi	r25, 0x00	; 0
+  b2:	08 95       	ret
 
-000000a0 <_exit>:
-  a0:	f8 94       	cli
+000000b4 <_exit>:
+  b4:	f8 94       	cli
 
-000000a2 <__stop_program>:
-  a2:	ff cf       	rjmp	.-2      	; 0xa2 <__stop_program>
+000000b6 <__stop_program>:
+  b6:	ff cf       	rjmp	.-2      	; 0xb6 <__stop_program>
