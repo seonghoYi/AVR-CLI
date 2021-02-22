@@ -1,4 +1,5 @@
-src/hw/hw.d src/hw/hw.o: ../src/hw/hw.c ../src/hw/hw.h ../src/hw/hw_def.h \
+src/bsp/atmega128_it.d src/bsp/atmega128_it.o: ../src/bsp/atmega128_it.c \
+ ../src/main.h ../src/ap/ap.h ../src/hw/hw.h ../src/hw/hw_def.h \
  ../src/common/def.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -24,7 +25,11 @@ src/hw/hw.d src/hw/hw.o: ../src/hw/hw.c ../src/hw/hw.h ../src/hw/hw_def.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- ../src/lib/Drivers/Inc/atmega128_DRV_uart.h
+ ../src/lib/Drivers/Inc/atmega128_DRV_uart.h ../src/bsp/atmega128_it.h
+
+../src/main.h:
+
+../src/ap/ap.h:
 
 ../src/hw/hw.h:
 
@@ -85,3 +90,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
 
 ../src/lib/Drivers/Inc/atmega128_DRV_uart.h:
+
+../src/bsp/atmega128_it.h:
