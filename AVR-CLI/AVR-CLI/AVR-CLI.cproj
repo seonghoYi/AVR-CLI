@@ -109,6 +109,8 @@
       <Value>../src/lib/Drivers/Inc</Value>
       <Value>../src/lib/Drivers/Src</Value>
       <Value>../src/lib/Device/Inc</Value>
+      <Value>../src/common/hw/include</Value>
+      <Value>../src/hw/driver</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -153,6 +155,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\common\def.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\common\hw\include\gpio.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\hw\driver\gpio.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\hw\hw.c">

@@ -8,6 +8,8 @@ src\bsp\atmega128_it.c
 
 src\bsp\bsp.c
 
+src\hw\driver\gpio.c
+
 src\hw\hw.c
 
 src\lib\Drivers\Src\atmega128_DRV.c

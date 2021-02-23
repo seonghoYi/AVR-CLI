@@ -1,6 +1,9 @@
 src/lib/Drivers/Src/atmega128_DRV_gpio.d \
  src/lib/Drivers/Src/atmega128_DRV_gpio.o: \
  ../src/lib/Drivers/Src/atmega128_DRV_gpio.c \
+ ../src/lib/Drivers/Inc/atmega128_DRV.h ../src/bsp/atmega128_conf.h \
+ ../src/lib/Drivers/Inc/atmega128_DRV_gpio.h \
+ ../src/lib/Drivers/Inc/atmega128_DRV_def.h \
  ../src/lib/Device/Inc/atmega128.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
@@ -16,7 +19,16 @@ src/lib/Drivers/Src/atmega128_DRV_gpio.d \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
+ ../src/lib/Drivers/Inc/atmega128_DRV_uart.h
+
+../src/lib/Drivers/Inc/atmega128_DRV.h:
+
+../src/bsp/atmega128_conf.h:
+
+../src/lib/Drivers/Inc/atmega128_DRV_gpio.h:
+
+../src/lib/Drivers/Inc/atmega128_DRV_def.h:
 
 ../src/lib/Device/Inc/atmega128.h:
 
@@ -49,3 +61,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
+
+../src/lib/Drivers/Inc/atmega128_DRV_uart.h:

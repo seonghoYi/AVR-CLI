@@ -2,6 +2,8 @@ Archive member included to satisfy reference by file (symbol)
 
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_exit.o)
                               C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega128/avr51/crtatmega128.o (exit)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_tablejump2.o)
+                              src/lib/Drivers/Src/atmega128_DRV_gpio.o (__tablejump2__)
 
 Discarded input sections
 
@@ -16,6 +18,16 @@ Discarded input sections
  .text          0x00000000        0x0 src/bsp/bsp.o
  .data          0x00000000        0x0 src/bsp/bsp.o
  .bss           0x00000000        0x0 src/bsp/bsp.o
+ .text          0x00000000        0x0 src/hw/driver/gpio.o
+ .data          0x00000000        0x0 src/hw/driver/gpio.o
+ .bss           0x00000000        0x0 src/hw/driver/gpio.o
+ .debug_info    0x00000000       0x5d src/hw/driver/gpio.o
+ .debug_abbrev  0x00000000       0x26 src/hw/driver/gpio.o
+ .debug_aranges
+                0x00000000       0x18 src/hw/driver/gpio.o
+ .debug_line    0x00000000       0x1a src/hw/driver/gpio.o
+ .debug_str     0x00000000      0x16a src/hw/driver/gpio.o
+ .comment       0x00000000       0x31 src/hw/driver/gpio.o
  .text          0x00000000        0x0 src/hw/hw.o
  .data          0x00000000        0x0 src/hw/hw.o
  .bss           0x00000000        0x0 src/hw/hw.o
@@ -32,13 +44,32 @@ Discarded input sections
  .text          0x00000000        0x0 src/lib/Drivers/Src/atmega128_DRV_gpio.o
  .data          0x00000000        0x0 src/lib/Drivers/Src/atmega128_DRV_gpio.o
  .bss           0x00000000        0x0 src/lib/Drivers/Src/atmega128_DRV_gpio.o
- .debug_info    0x00000000       0x56 src/lib/Drivers/Src/atmega128_DRV_gpio.o
- .debug_abbrev  0x00000000       0x26 src/lib/Drivers/Src/atmega128_DRV_gpio.o
+ .text.gpioInit
+                0x00000000      0x208 src/lib/Drivers/Src/atmega128_DRV_gpio.o
+ .progmem.gcc_sw_table.gpioInit
+                0x00000000        0xe src/lib/Drivers/Src/atmega128_DRV_gpio.o
+ .text.gpioReadPin
+                0x00000000       0xac src/lib/Drivers/Src/atmega128_DRV_gpio.o
+ .progmem.gcc_sw_table.gpioReadPin
+                0x00000000        0xe src/lib/Drivers/Src/atmega128_DRV_gpio.o
+ .text.gpioWritePin
+                0x00000000      0x1a8 src/lib/Drivers/Src/atmega128_DRV_gpio.o
+ .progmem.gcc_sw_table.gpioWritePin
+                0x00000000        0xe src/lib/Drivers/Src/atmega128_DRV_gpio.o
+ .text.gpioTogglePin
+                0x00000000       0xb6 src/lib/Drivers/Src/atmega128_DRV_gpio.o
+ .progmem.gcc_sw_table.gpioTogglePin
+                0x00000000        0xe src/lib/Drivers/Src/atmega128_DRV_gpio.o
+ .debug_info    0x00000000      0x1c4 src/lib/Drivers/Src/atmega128_DRV_gpio.o
+ .debug_abbrev  0x00000000      0x10f src/lib/Drivers/Src/atmega128_DRV_gpio.o
+ .debug_loc     0x00000000      0x464 src/lib/Drivers/Src/atmega128_DRV_gpio.o
  .debug_aranges
-                0x00000000       0x18 src/lib/Drivers/Src/atmega128_DRV_gpio.o
- .debug_line    0x00000000       0x1a src/lib/Drivers/Src/atmega128_DRV_gpio.o
- .debug_str     0x00000000      0x179 src/lib/Drivers/Src/atmega128_DRV_gpio.o
+                0x00000000       0x38 src/lib/Drivers/Src/atmega128_DRV_gpio.o
+ .debug_ranges  0x00000000       0x28 src/lib/Drivers/Src/atmega128_DRV_gpio.o
+ .debug_line    0x00000000      0x331 src/lib/Drivers/Src/atmega128_DRV_gpio.o
+ .debug_str     0x00000000      0x1ff src/lib/Drivers/Src/atmega128_DRV_gpio.o
  .comment       0x00000000       0x31 src/lib/Drivers/Src/atmega128_DRV_gpio.o
+ .debug_frame   0x00000000       0x54 src/lib/Drivers/Src/atmega128_DRV_gpio.o
  .text          0x00000000        0x0 src/lib/Drivers/Src/atmega128_DRV_uart.o
  .data          0x00000000        0x0 src/lib/Drivers/Src/atmega128_DRV_uart.o
  .bss           0x00000000        0x0 src/lib/Drivers/Src/atmega128_DRV_uart.o
@@ -68,6 +99,22 @@ Discarded input sections
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_exit.o)
  .text.libgcc.fixed
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_exit.o)
+ .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_tablejump2.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_tablejump2.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_tablejump2.o)
+ .text.libgcc.mul
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_tablejump2.o)
+ .text.libgcc.div
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_tablejump2.o)
+ .text.libgcc   0x00000000       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_tablejump2.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_tablejump2.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_tablejump2.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_tablejump2.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr51\libgcc.a(_tablejump2.o)
 
 Memory Configuration
 
@@ -88,6 +135,7 @@ LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/
 LOAD src/ap/ap.o
 LOAD src/bsp/atmega128_it.o
 LOAD src/bsp/bsp.o
+LOAD src/hw/driver/gpio.o
 LOAD src/hw/hw.o
 LOAD src/lib/Drivers/Src/atmega128_DRV.o
 LOAD src/lib/Drivers/Src/atmega128_DRV_gpio.o
