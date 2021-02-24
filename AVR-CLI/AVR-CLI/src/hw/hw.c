@@ -3,4 +3,6 @@
 void hwInit(void)
 {
 	bspInit();
+	gpioInit();
+	uartInit();
 }

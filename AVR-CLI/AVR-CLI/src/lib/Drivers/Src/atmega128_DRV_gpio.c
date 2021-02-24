@@ -2,7 +2,7 @@
 
 #ifdef DRV_GPIO_MODULE_ENABLED
 
-void gpioInit(uint8_t port, GPIO_InitTypeDef *GPIO_Init)
+void GPIO_Init(uint8_t port, GPIO_InitTypeDef *GPIO_Init)
 {
 	switch(port)
 	{
@@ -82,7 +82,7 @@ void gpioInit(uint8_t port, GPIO_InitTypeDef *GPIO_Init)
 
 }
 
-GPIO_PinState gpioReadPin(uint8_t port, uint8_t pin)
+GPIO_PinState GPIO_ReadPin(uint8_t port, uint8_t pin)
 {
 	GPIO_PinState ret = 0x00;
 	
@@ -115,7 +115,7 @@ GPIO_PinState gpioReadPin(uint8_t port, uint8_t pin)
 	return ret;
 }
 
-void gpioWritePin(uint8_t port, uint8_t pin, GPIO_PinState pinState)
+void GPIO_WritePin(uint8_t port, uint8_t pin, GPIO_PinState pinState)
 {
 	switch(port)
 	{
@@ -194,7 +194,7 @@ void gpioWritePin(uint8_t port, uint8_t pin, GPIO_PinState pinState)
 	}
 }
 
-void gpioTogglePin(uint8_t port, uint8_t pin)
+void GPIO_TogglePin(uint8_t port, uint8_t pin)
 {
 	switch(port)
 	{
