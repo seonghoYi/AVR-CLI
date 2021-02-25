@@ -121,6 +121,11 @@ StatusTypeDef UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t 
 	uint16_t	*pdata16bits	= NULL;
 	USART_TypeDef *usart		= &USART_descripter[huart->USARTn];
 	
+	if (usart == NULL)
+	{
+		return ERROR;
+	}
+	
 	huart->ErrorCode			= UART_ERROR_NONE;
 	
 	huart->TxXferSize			= Size;
@@ -163,6 +168,11 @@ StatusTypeDef UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t S
 	uint16_t		*pdata16bits	= NULL;
 	USART_TypeDef *usart			= &USART_descripter[huart->USARTn];
 	
+	if (usart == NULL)
+	{
+		return ERROR;
+	}
+	
 	huart->ErrorCode				= UART_ERROR_NONE;
 	
 	huart->RxXferSize				= Size;
@@ -198,18 +208,63 @@ StatusTypeDef UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t S
 	return OK;
 }
 
+StatusTypeDef UART_Transmit_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size)
+{
+	USART_TypeDef *usart = &USART_descripter[huart->USARTn];
+	
+	if (usart == NULL)
+	{
+		return ERROR;
+	}
+	
+	huart->pTxBuffPtr	= pData;
+	huart->TxXferSize	= Size;
+	huart->TxXferCount	= Size;
+	
+	SETB(*(usart->UCSRnB), 6);
+	return OK;
+}
+
+StatusTypeDef UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size)
+{
+	USART_TypeDef *usart = &USART_descripter[huart->USARTn];
+	
+	if (usart == NULL)
+	{
+		return ERROR;
+	}
+	
+	huart->pRxBuffPtr	= pData;
+	huart->RxXferSize	= Size;
+	huart->RxXferCount	= Size;
+	
+	SETB(*(usart->UCSRnB), 7);
+	
+	return OK;
+}
 
 
 
+void UART_TxIRQHandler(UART_HandleTypeDef *huart)
+{
+	UART_TxCpltCallback(huart);
+}
 
+void UART_RxIRQHandler(UART_HandleTypeDef *huart)
+{
+	UART_Receive(huart, huart->pRxBuffPtr, huart->RxXferSize, 100);
+	UART_RxCpltCallback(huart);
+}
 
+__attribute__((weak)) void UART_TxCpltCallback(UART_HandleTypeDef *huart)
+{
+	return;
+}
 
-
-
-
-
-
-
+__attribute__((weak)) void UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	return;
+}
 
 
 

@@ -7,9 +7,11 @@ static bool is_open[UART_MAX_CH];
 
 static qbuffer_t qbuffer[UART_MAX_CH];
 static uint8_t rx_buf[512];
-//static uint8_t rx_data[UART_MAX_CH];
+static uint8_t rx_data[UART_MAX_CH];
 
 UART_HandleTypeDef huart1;
+
+
 
 bool uartInit(void)
 {
@@ -40,6 +42,8 @@ bool uartOpen(uint8_t ch, uint32_t baud)
 		huart1.Init.OverSampling	= UART_OVERSAMPLING_8;
 
 		qbufferCreate(&qbuffer[ch], rx_buf, 512);
+		
+		UART_Receive_IT(&huart1, &rx_data[ch], 1);
 
 		if (UART_Init(&huart1) != OK)
 		{
@@ -126,5 +130,22 @@ uint32_t uartGetBaud(uint8_t ch)
 	}
 	return baud;
 }
+
+
+void UART_TxCpltCallback(UART_HandleTypeDef *huart)
+{
+	return;
+}
+
+void UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	switch(huart->USARTn)
+	{
+		case USART0:
+		qbufferWrite(&qbuffer[_DEF_UART0], &rx_data[_DEF_UART0], 1);
+		break;
+	}
+}
+
 
 #endif
