@@ -22,6 +22,15 @@
 #define GPIOF 5
 #define GPIOG 6
 
+typedef struct
+{
+	volatile uint8_t *DDRn;
+	volatile uint8_t *PORTn;
+	volatile uint8_t *PINn;
+} GPIO_TypeDef;
+
+
+
 #define USART0	0
 #define USART1	1
 

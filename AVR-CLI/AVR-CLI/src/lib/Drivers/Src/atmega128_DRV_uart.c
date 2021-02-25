@@ -2,34 +2,20 @@
 
 #ifdef DRV_UART_MODULE_ENABLED
 
-USART_TypeDef USART0_descripter = {&UDR0, &UCSR0A, &UCSR0B, &UCSR0C, &UBRR0H, &UBRR0L};
-USART_TypeDef USART1_descripter = {&UDR1, &UCSR1A, &UCSR1B, &UCSR1C, &UBRR1H, &UBRR1L};
-
-
+USART_TypeDef USART_descripter[] = {
+	{&UDR0, &UCSR0A, &UCSR0B, &UCSR0C, &UBRR0H, &UBRR0L},
+	{&UDR1, &UCSR1A, &UCSR1B, &UCSR1C, &UBRR1H, &UBRR1L},	
+};
 
 StatusTypeDef UART_Init(UART_HandleTypeDef *huart)
 {
 	uint32_t temp;
-	USART_TypeDef *usart = NULL;
+	USART_TypeDef *usart = &USART_descripter[huart->USARTn];
 	if (huart == NULL)
 	{
 		return ERROR;
 	}
 	
-	switch(huart->USARTn)
-	{
-		case USART0:
-		usart = &USART0_descripter;
-		break;
-		case USART1:
-		usart = &USART1_descripter;
-		break;
-	}
-	
-	if (usart == NULL)
-	{
-		return ERROR;
-	}
 	
 	switch(huart->Init.OverSampling)
 	{
@@ -131,40 +117,25 @@ StatusTypeDef UART_Init(UART_HandleTypeDef *huart)
 
 StatusTypeDef UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-	uint8_t		*pdata8bits = NULL;
-	uint16_t	*pdata16bits = NULL;
-	USART_TypeDef *usart = NULL;
+	uint8_t		*pdata8bits		= NULL;
+	uint16_t	*pdata16bits	= NULL;
+	USART_TypeDef *usart		= &USART_descripter[huart->USARTn];
 	
-	huart->ErrorCode = UART_ERROR_NONE;
+	huart->ErrorCode			= UART_ERROR_NONE;
 	
-	huart->TxXferSize = Size;
-	huart->TxXferCount = Size;
+	huart->TxXferSize			= Size;
+	huart->TxXferCount			= Size;
 	
-	switch(huart->USARTn)
-	{
-		case USART0:
-		usart = &USART0_descripter;
-		break;
-		case USART1:
-		usart = &USART1_descripter;
-		break;
-		default:
-		break;
-	}
-	
-	if (huart == NULL)
-	{
-		return ERROR;
-	}
+
 	
 	if (huart->Init.WordLength == UART_WORDLENGTH_9B && huart->Init.Parity == UART_PARITY_NONE)
 	{
-		pdata8bits = NULL;
+		pdata8bits	= NULL;
 		pdata16bits = (uint16_t *) pData;
 	}
 	else
 	{
-		pdata8bits = pData;
+		pdata8bits	= pData;
 		pdata16bits = NULL;
 	}
 	
@@ -188,41 +159,24 @@ StatusTypeDef UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t 
 
 StatusTypeDef UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-	uint8_t		*pdata8bits = NULL;
-	uint16_t	*pdata16bits = NULL;
-	USART_TypeDef *usart = NULL;
+	uint8_t			*pdata8bits		= NULL;
+	uint16_t		*pdata16bits	= NULL;
+	USART_TypeDef *usart			= &USART_descripter[huart->USARTn];
 	
-	huart->ErrorCode = UART_ERROR_NONE;
+	huart->ErrorCode				= UART_ERROR_NONE;
 	
-	huart->RxXferSize = Size;
-	huart->RxXferCount = Size;
+	huart->RxXferSize				= Size;
+	huart->RxXferCount				= Size;
 	
-	
-	switch(huart->USARTn)
-	{
-		case USART0:
-		usart = &USART0_descripter;
-		break;
-		case USART1:
-		usart = &USART1_descripter;
-		break;
-		default:
-		break;
-	}
-	
-	if (huart == NULL)
-	{
-		return ERROR;
-	}
 	
 	if (huart->Init.WordLength == UART_WORDLENGTH_9B && huart->Init.Parity == UART_PARITY_NONE)
 	{
-		pdata8bits = NULL;
+		pdata8bits	= NULL;
 		pdata16bits = (uint16_t *) pData;
 	}
 	else
 	{
-		pdata8bits = pData;
+		pdata8bits	= pData;
 		pdata16bits = NULL;
 	}
 
