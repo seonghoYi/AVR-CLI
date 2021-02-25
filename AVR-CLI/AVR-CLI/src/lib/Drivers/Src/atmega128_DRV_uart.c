@@ -19,13 +19,13 @@ StatusTypeDef UART0_Init(UART_HandleTypeDef *huart)
 	switch(huart->Init.OverSampling)
 	{
 		case UART_OVERSAMPLING_8:
-		temp = (F_CPU / (16 * huart->Init.BaudRate)) - 1;
+		temp = (float)(F_CPU / (float)(16 * huart->Init.BaudRate)) - 0.5; //-1.0 + 0.5 => for rounding
 		UBRR0H = (temp >> 8) & 0xFF;
 		UBRR0L = temp & 0xFF;
 		CLRB(UCSR0A, 1);
 		break;
 		case UART_OVERSAMPLING_16:
-		temp = (F_CPU / (8 * huart->Init.BaudRate)) - 1;
+		temp = (float)(F_CPU / (float)(8 * huart->Init.BaudRate)) - 0.5;
 		UBRR0H = (temp >> 8) & 0xFF;
 		UBRR0L = temp & 0xFF;
 		SETB(UCSR0A, 1);
@@ -88,6 +88,23 @@ StatusTypeDef UART0_Init(UART_HandleTypeDef *huart)
 		case  UART_PARITY_ODD:
 		SETB(UCSR0C, 6);
 		SETB(UCSR0C, 5);
+		break;
+		default:
+		break;
+	}
+	
+	
+	switch(huart->Init.Mode)
+	{
+		case UART_MODE_RX:
+		SETB(UCSR0B, 4);
+		break;
+		case UART_MODE_TX:
+		SETB(UCSR0B, 3);
+		break;
+		case UART_MODE_RX_TX:
+		SETB(UCSR0B, 3);
+		SETB(UCSR0B, 4);
 		break;
 		default:
 		break;
@@ -177,6 +194,22 @@ StatusTypeDef UART1_Init(UART_HandleTypeDef *huart)
 		case  UART_PARITY_ODD:
 		SETB(UCSR1C, 6);
 		SETB(UCSR1C, 5);
+		break;
+		default:
+		break;
+	}
+	
+	switch(huart->Init.Mode)
+	{
+		case UART_MODE_RX:
+		SETB(UCSR1B, 4);
+		break;
+		case UART_MODE_TX:
+		SETB(UCSR1B, 3);
+		break;
+		case UART_MODE_RX_TX:
+		SETB(UCSR1B, 3);
+		SETB(UCSR1B, 4);
 		break;
 		default:
 		break;

@@ -13,6 +13,8 @@ typedef struct
 	
 	uint8_t Parity;
 	
+	uint8_t Mode;
+	
 	uint8_t OverSampling;
 	
 } UART_InitTypeDef;
@@ -75,6 +77,10 @@ typedef struct
 
 #define UART_OVERSAMPLING_8		0x00
 #define UART_OVERSAMPLING_16	0x01
+
+#define UART_MODE_RX			0x00
+#define UART_MODE_TX			0x01
+#define UART_MODE_RX_TX			0x02
 
 
 

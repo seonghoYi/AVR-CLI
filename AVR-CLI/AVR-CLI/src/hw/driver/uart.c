@@ -31,12 +31,13 @@ bool uartOpen(uint8_t ch, uint32_t baud)
 	switch(ch)
 	{
 		case _DEF_UART0:
-		huart1.USARTn = USART0;
-		huart1.Init.BaudRate = baud;
-		huart1.Init.StopBits = UART_STOPBITS_1;
-		huart1.Init.Parity = UART_PARITY_NONE;
-		huart1.Init.WordLength = UART_WORDLENGTH_8B;
-		huart1.Init.OverSampling = UART_OVERSAMPLING_8;
+		huart1.USARTn				= USART0;
+		huart1.Init.BaudRate		= baud;
+		huart1.Init.StopBits		= UART_STOPBITS_1;
+		huart1.Init.Parity			= UART_PARITY_NONE;
+		huart1.Init.WordLength		= UART_WORDLENGTH_8B;
+		huart1.Init.Mode			= UART_MODE_RX_TX;
+		huart1.Init.OverSampling	= UART_OVERSAMPLING_8;
 
 		qbufferCreate(&qbuffer[ch], rx_buf, 512);
 
