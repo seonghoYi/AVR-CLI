@@ -1,5 +1,6 @@
 ﻿#include "ap.h"
 
+
 void apInit(void)
 {
 	uartOpen(_DEF_UART0, 115200);
@@ -12,6 +13,10 @@ void apMain(void)
 {
 	//char *str = "Hello, World!";
 	char input = 0;
+	uint32_t baud = 115200;
+	
+	uartPrintf(_DEF_UART0, "baud: %lu bps\n", baud);//uartGetBaud(_DEF_UART0));
+	
 	while(true)
 	{
 		/*
@@ -21,13 +26,17 @@ void apMain(void)
 		
 		//uartPrintf(_DEF_UART0, "uart0 : %s\n", str);
 		//gpioPinToggle(_DEF_GPIO0);
-		uartPrintf(_DEF_UART0, "available : %d\n", input, uartAvailable(_DEF_UART0));
+		
+		//uartPrintf(_DEF_UART0, "available : %d\n", input, uartAvailable(_DEF_UART0));
+		
 		if (uartAvailable(_DEF_UART0) > 0)
 		{
 			gpioPinWrite(_DEF_GPIO0, true);
 			input = uartRead(_DEF_UART0);
 			uartPrintf(_DEF_UART0, "echo : %c, available : %d\n", input, uartAvailable(_DEF_UART0));
+			
 		}
+		
 
 	}
 }

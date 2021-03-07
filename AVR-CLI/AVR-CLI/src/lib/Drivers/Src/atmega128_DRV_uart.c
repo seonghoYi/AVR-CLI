@@ -1,5 +1,7 @@
 ﻿#include "atmega128_DRV.h"
 
+
+
 #ifdef DRV_UART_MODULE_ENABLED
 
 USART_TypeDef USART_descripter[] = {
@@ -74,6 +76,8 @@ StatusTypeDef UART_Init(UART_HandleTypeDef *huart)
 		case UART_STOPBITS_2:
 		SETB(*(usart->UCSRnC), 4);
 		break;
+		default:
+		break;
 	}
 	
 	switch(huart->Init.Parity)
@@ -117,9 +121,9 @@ StatusTypeDef UART_Init(UART_HandleTypeDef *huart)
 
 StatusTypeDef UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout)
 {
-	uint8_t		*pdata8bits		= NULL;
-	uint16_t	*pdata16bits	= NULL;
-	USART_TypeDef *usart		= &USART_descripter[huart->USARTn];
+	uint8_t			*pdata8bits		= NULL;
+	uint16_t		*pdata16bits	= NULL;
+	USART_TypeDef	*usart			= &USART_descripter[huart->USARTn];
 	
 	if (usart == NULL)
 	{
@@ -156,6 +160,7 @@ StatusTypeDef UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t 
 		{
 			*(usart->UDRn) = *(pdata16bits + i);
 		}
+		
 	}
 	
 	
@@ -166,7 +171,7 @@ StatusTypeDef UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t S
 {
 	uint8_t			*pdata8bits		= NULL;
 	uint16_t		*pdata16bits	= NULL;
-	USART_TypeDef *usart			= &USART_descripter[huart->USARTn];
+	USART_TypeDef	*usart			= &USART_descripter[huart->USARTn];
 	
 	if (usart == NULL)
 	{
@@ -192,16 +197,14 @@ StatusTypeDef UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t S
 
 	for(int i = 0; i < huart->TxXferCount; i++)
 	{
-		while (!(*(usart->UCSRnA) & 0x80))
+		while (!(*(usart->UCSRnA) & 0x80) && !(*(usart->UCSRnA) & 0x20));
+		if (pdata16bits == NULL)
 		{
-			if (pdata16bits == NULL)
-			{
-				*(pdata8bits + i) = *(usart->UDRn);
-			}
-			else
-			{
-				*(pdata16bits + i) = *(usart->UDRn);
-			}
+			*(pdata8bits + i) = *(usart->UDRn);
+		}
+		else
+		{
+			*(pdata16bits + i) = *(usart->UDRn);
 		}
 	}
 
